@@ -1,0 +1,19 @@
+name: 'Flutter FVM Setup'
+description: "Sets up Flutter using FVM and the Flutter version specified in the project's .fvmrc file."
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup FVM
+      uses: kuhnroyal/flutter-fvm-config-action@v2
+
+    - name: Install Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: ${{ env.FLUTTER_CHANNEL }}
+        cache: true
+
+    - name: Get dependencies
+      run: flutter pub get
+      shell: bash
